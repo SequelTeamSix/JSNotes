@@ -1,0 +1,20 @@
+full stack web application
+leveraging Azure DB, a Java backend leveraging Spring MVC, and a JS frontend
+Java Backend should have unit testing
+Both frontend and backend should be deployed to Azure VMs
+Be prepared to talk about your team structure and your approach to devops and agile development
+
+Presentation: 20 minutes
+
+Team structure recommendations:
+    "What if I'm not the best programmer and other people are better at doing this
+    than me? :((()))"
+        Even so, there are plenty of responsibilities to go around:
+            You should have a single person in charge of Azure resources (devops engineer)
+            You should have a single person managing git merges and branches
+            You still have to do unit testing - this can be someone's entire responsitibility
+            You will most definitely need *multiple* people working mostly on the front end
+
+I would like you all to have some plan on what your project will be... by Wednesday
+    Don't know what to make?
+    A retail app is a safe bet
