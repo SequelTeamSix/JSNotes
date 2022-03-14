@@ -1,0 +1,27 @@
+/* we have several types of selectors: 
+ID
+Class
+Universal
+Element
+and more 
+*/
+
+/* id */
+#ferrari {
+    width: 50%;
+    height: auto;
+}
+/* element */
+li {
+    text-align: center;
+    color: blue;
+}
+/* class */
+.specialList {
+    font-size: 20px;
+    font-family: Arial;
+}
+* {
+    color: red;
+    font-family: Helvetica;
+}
