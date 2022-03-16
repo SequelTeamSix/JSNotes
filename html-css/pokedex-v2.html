@@ -9,23 +9,40 @@
         changing your html file is good
         also, it would allow for multiple pages to use the same styling
         -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
         <link rel = "stylesheet" href = "./pokeStyling.css">
         <!-- metadata : like stylesheets, title of website, charset (character encodings) -->
         <title>Pokedex V2</title>
 
     </head>
     <body>
-        <!-- A span is an example of an inline element: meaning no space is created aorund the element -->
-        <span>Using the Fetch API to retrieve pokemon data</span>
-        <!-- A block element creates a new html block with spacing around it -->
-        <p>Input pokemon id here:</p>
-        <input type = "number" id="dataInput" />
-        <p>Click to get pokemon info: </p>
-        <button type = "button", id="getData">Get Pokemon Data</button>
-        <p>Pokemon will be loaded here: </p>
-        <section id = "data">
+        
+        <div class ="container">
+            <div class = "row">
+                <div class = "col-sm">
+                    <p>Input partial pokemon name here:</p>
+                    <input type = "text" id = "nameInput">
+                    <button type = button, id = "getName">Get Pokemon Names</button>
+                    <section id = "list">
 
-        </section>
+                    </section>
+                </div>
+                <div class = "col-lg">
+                    <!-- A span is an example of an inline element: meaning no space is created aorund the element -->
+                    <span>Using the Fetch API to retrieve pokemon data</span>
+                    <!-- A block element creates a new html block with spacing around it -->
+                    <p>Input pokemon id here:</p>
+                    <input type = "number" id="dataInput" />
+                    <p>Click to get pokemon info: </p>
+                    <button type = "button", id="getData">Get Pokemon Data</button>
+                    <p>Pokemon will be loaded here: </p>
+                    <section id = "data">
+
+                    </section>
+                </div>
+            </div>
+        </div>
         <script src = 'pokedex-v2.js'></script>
     </body>
 </html>

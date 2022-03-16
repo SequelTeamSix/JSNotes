@@ -21,14 +21,21 @@
 
 var dataInputBox = document.getElementById('dataInput');
 var getDataButton = document.getElementById('getData');
-var dataSection = document.getElementById('data');;
-const apiURL = 'http://pokeapi.co/api/v2/pokemon/'
+var dataSection = document.getElementById('data');
+var listSection = document.getElementById('list');
+var nameInputBox = document.getElementById('nameInput');
+var nameButton = document.getElementById('getName');
+const apiURL = 'http://pokeapi.co/api/v2/';
+var allPokemonArr = [];
+
 
 /*
 Monday we took care of events by saying something like button.onclick = doSomething()
 Instead we pass in the method type, as well as a function that we will use as a *callback*
 Meaning: a callback function is a function passed in as a parameter that will be executed later
 */
+
+
 
 getDataButton.addEventListener('click', generateData);
 
@@ -51,7 +58,7 @@ async function generateData() {
     *Promise*
     (some variable that will eventually be filled)
     */
-    let response = await fetch (apiURL + userInput);
+    let response = await fetch (apiURL + 'pokemon/' + userInput);
     console.log(response);
     if(response.status === 200){
         let data = await response.json();
@@ -106,3 +113,42 @@ function populateData(pokemonObject) {
         dataSection.appendChild(abilitiesList);
 
 }
+
+nameButton.addEventListener('click', populateList);
+
+async function generateList() {
+    let response = await fetch (apiURL + 'pokemon?limit=151');
+    console.log(response);
+    if(response.status === 200){
+        let data = await response.json();
+        console.log(data);
+        for(let pokemon of data.results){
+            allPokemonArr.push(pokemon);
+        }
+    }else{
+        dataSection.innerHTML = 'It Got Away!';
+    }
+}
+
+function populateList(){
+    listSection.innerHTML = '';
+    pokemonName = nameInputBox.value;
+
+    /*
+        we are passing in a function to methods like filter, map, or sort
+        that determine what to do with any particular element
+
+    */
+    pokeList = allPokemonArr.filter(pokemon => pokemon.name.includes(pokemonName));
+
+    pokemonList = document.createElement('ol');
+    for(let pokemon of pokeList){
+        console.log(pokemon);
+        pokemonListItem = document.createElement('li');
+        pokemonListItem.innerHTML = pokemon.name;
+        pokemonList.appendChild(pokemonListItem);
+    }
+    listSection.appendChild(pokemonList);
+}
+
+generateList();
