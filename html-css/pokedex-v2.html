@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <!-- there are multiple ways to style:
+        external (stylesheets) 
+        internal (within the head)
+        inline (within the element)
+        best one?
+        external, without a doubt, because being able to modify styles without
+        changing your html file is good
+        also, it would allow for multiple pages to use the same styling
+        -->
+        <link rel = "stylesheet" href = "./pokeStyling.css">
+        <!-- metadata : like stylesheets, title of website, charset (character encodings) -->
+        <title>Pokedex V2</title>
+
+    </head>
+    <body>
+        <!-- A span is an example of an inline element: meaning no space is created aorund the element -->
+        <span>Using the Fetch API to retrieve pokemon data</span>
+        <!-- A block element creates a new html block with spacing around it -->
+        <p>Input pokemon id here:</p>
+        <input type = "number" id="dataInput" />
+        <p>Click to get pokemon info: </p>
+        <button type = "button", id="getData">Get Pokemon Data</button>
+        <p>Pokemon will be loaded here: </p>
+        <section id = "data">
+
+        </section>
+        <script src = 'pokedex-v2.js'></script>
+    </body>
+</html>
