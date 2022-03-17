@@ -1,3 +1,4 @@
+//import { Pokemon } from './pokemon';
 /*
     What do we need?
 
@@ -20,13 +21,14 @@
 */
 
 var dataInputBox = document.getElementById('dataInput');
-var getDataButton = document.getElementById('getData');
+var catchPokemonButton = document.getElementById('getData');
 var dataSection = document.getElementById('data');
 var listSection = document.getElementById('list');
 var nameInputBox = document.getElementById('nameInput');
 var nameButton = document.getElementById('getName');
 const apiURL = 'http://pokeapi.co/api/v2/';
 var allPokemonArr = [];
+var caughtPokemonArr = [];
 
 
 /*
@@ -37,12 +39,20 @@ Meaning: a callback function is a function passed in as a parameter that will be
 
 
 
-getDataButton.addEventListener('click', generateData);
+catchPokemonButton.addEventListener('click', catchPokemon);
+
+function catchPokemon(){
+    caughtPokemonArr.push(currentPokemon);
+    let allCaughtPokemonNames = '';
+    
+    caughtPokemonArr.forEach(pokemon => allCaughtPokemonNames = allCaughtPokemonNames+(pokemon.name+', '))
+    alert(allCaughtPokemonNames);
+}
 
 /*async function:
 meaning, asynchronous function:
 it allows for asynchronous execution while waiting for an await*/
-async function generateData() {
+async function generateData(url) {
     /*
         rudimentary DOM manipulation:
         DOM?
@@ -58,7 +68,7 @@ async function generateData() {
     *Promise*
     (some variable that will eventually be filled)
     */
-    let response = await fetch (apiURL + 'pokemon/' + userInput);
+    let response = await fetch (url);
     console.log(response);
     if(response.status === 200){
         let data = await response.json();
@@ -114,7 +124,7 @@ function populateData(pokemonObject) {
 
 }
 
-nameButton.addEventListener('click', populateList);
+nameInputBox.addEventListener('input', populateList);
 
 async function generateList() {
     let response = await fetch (apiURL + 'pokemon?limit=151');
@@ -123,14 +133,24 @@ async function generateList() {
         let data = await response.json();
         console.log(data);
         for(let pokemon of data.results){
-            allPokemonArr.push(pokemon);
+            let newPokemon = new Pokemon(pokemon.name, pokemon.url);
+            allPokemonArr.push(newPokemon);
         }
     }else{
         dataSection.innerHTML = 'It Got Away!';
     }
 }
 
+function compareNames(name1, name2){
+    if(name1<name2){
+        return 1;
+    }else{
+        return -1;
+    }
+}
+
 function populateList(){
+    console.log("onchange?");
     listSection.innerHTML = '';
     pokemonName = nameInputBox.value;
 
@@ -140,15 +160,49 @@ function populateList(){
 
     */
     pokeList = allPokemonArr.filter(pokemon => pokemon.name.includes(pokemonName));
+    pokeList.map(pokemon => pokemon.name = pokemon.name.toUpperCase());
+    pokeList.sort((p1, p2) =>  {
+        if(p1.name>p2.name){
+            return 1;
+        }else{
+            return -1;
+        } });
 
     pokemonList = document.createElement('ol');
     for(let pokemon of pokeList){
         console.log(pokemon);
         pokemonListItem = document.createElement('li');
+
         pokemonListItem.innerHTML = pokemon.name;
+        pokemonListItem.onclick = changeCurrentPokemon;
+
         pokemonList.appendChild(pokemonListItem);
     }
     listSection.appendChild(pokemonList);
 }
 
 generateList();
+
+function changeCurrentPokemon(event){
+    pokeName = event.target.innerHTML;
+    pokeObject = allPokemonArr.filter(pokemon => pokemon.name == pokeName)[0];
+    currentPokemon = pokeObject;
+    generateData(pokeObject.url);
+    //alert("Current pokemon changed to "+ pokeObject.name + pokeObject.url);
+}
+
+class Pokemon {
+    constructor(name, url){
+        this.name = name;
+        this.url = url;
+    }
+    toString(){
+        return this.name + ' : ' + this.url;
+    }
+}
+
+/*this var is still accessible throughout the entire js file
+how?
+hoisting - js 'hoists' things like vars, functions, class declarations to the top of the file*/
+var currentPokemon;
+/*that can be disabled with 'use strict'*/
