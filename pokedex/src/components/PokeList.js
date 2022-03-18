@@ -1,5 +1,7 @@
 import * as React from 'react';
 import axios from 'axios';
+import {PokeCard} from './PokeCard'
+import { ClickButton } from './ClickButton';
 
 // install and import axios later for rest api calls
 
@@ -43,7 +45,7 @@ export class PokeList extends React.Component {
         return (
             <div>
                 <button onClick={()=>this.generatePokemon()}>Click to generate all pokemon!</button>
-                <button onClick={()=>this.buyPokeBall()}>Click to buy pokeball!</button>
+                <ClickButton buyPokeBall={this.buyPokeBall.bind(this)}/>
                 {
                     this.state.numPokeBalls >0 &&
                     <button onClick={()=>this.usePokeBall()}>Click to use pokeball!</button>
@@ -51,7 +53,7 @@ export class PokeList extends React.Component {
                 <p>Number of pokeballs : {this.state.numPokeBalls}</p>
                 <ul>
                 {
-                    this.state.pokemon.map(pokemon => <li>{pokemon.name}</li>)
+                    this.state.pokemon.map(pokemon => <PokeCard key = {pokemon.name} name = {pokemon.name} url = {pokemon.url}/>)
                 }
                 </ul>
             </div>
