@@ -1,11 +1,12 @@
+import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { ClickerDisplayComponent } from './components/buttonPage';
+import { ButtonPage } from './components/ButtonPage';
 
 function App() {
   return (
     <div className="App">
-      <ClickerDisplayComponent/>
+      <ButtonPage/>
     </div>
   );
 }

@@ -23,6 +23,15 @@
 // the presentation of the component: properties, which the component recieves at start,
 // and state, which the component can configure itself
 
+// Props: an object passed in from the parent component containing data typically related to the setup
+// of the component
+// State: an object that contains data that the developer decides can theoretically change what should
+// be displayed on the component
+// An update to state is scheduled either by UseState() or .setState(), which will rerender the component
+// with the new information that is in the state
+// State: object containing the values that ultimately should be displayed on the webpage
+// Props can also be displayed, but they don't change, realistically
+
 // With function components, state should be modified with useState, with class, we should have
 // a state object, and modify it using setState()
 // What this will do, in either case, is trigger the component to rerender its portion of the DOM
